@@ -2,7 +2,7 @@
     "builds": [{
         "src": "glamping_app/wsgi.py",
         "use": "@vercel/python",
-        "config": {"maxLambdaSize": "15mb", "runtimes": "python3.11"}
+        "config": {"maxLambdaSize": "15mb", "runtimes": "python3.12"}
     }],
     "routes": [
         {
