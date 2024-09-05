@@ -1,0 +1,13 @@
+Login Page?
+    - Login will help avoiding previous bookers to enter their data again.
+    - Will have a change details page.
+
+Home page
+- Header
+- Footer
+- Have links to the other sites like buckingham & Lloyds, will boost adveritsement
+
+Will have an automated email system.
+
+How is the price determined?
+
