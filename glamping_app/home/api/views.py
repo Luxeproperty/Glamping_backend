@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from home.api.serealizers import AddPodSerializer
+from home.api.serealizers import AddPodSerializer, AddPodImageSerializer
 from home.models import Pods
 from home.api.permissions import IsAdminOrReadOnly
 
@@ -22,10 +22,23 @@ class PodListView(APIView):
         serializer = AddPodSerializer(data=request.data)
         
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=201)
-        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
-    
+            pod = serializer.save()
+            
+            image_serializer = AddPodImageSerializer(data=request.data)
+            if image_serializer.is_valid():
+                images = image_serializer.validated_data.get('images')
+                
+                for image in images:
+                    Pods.objects.create(pod=pod, image=image)
+                
+                return Response(serializer.data, status=201)
+            
+            else:
+                pod.delete()
+                return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
     
 class PodDetailView(APIView):
     
