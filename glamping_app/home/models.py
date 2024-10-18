@@ -51,3 +51,6 @@ class Contact(models.Model):
     email = models.EmailField(blank=False, null=False)
     phone = PhoneNumberField(region="GB")
     message = models.TextField(blank=False, null=False)
+    
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.message}"
