@@ -15,3 +15,9 @@ class AddPodSerializer(serializers.ModelSerializer):
         model = Pods
         fields = '__all__'
         
+        
+class ContactSerializer(serializers.Serializer):
+    
+    class Meta:
+        model = Contact
+        fields = '__all__'
