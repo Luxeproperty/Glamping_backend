@@ -2,6 +2,7 @@ from rest_framework import status
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from home.api.serealizers import AddPodSerializer, AddPodImageSerializer, ContactSerializer
 from home.models import Pods, PodImages
@@ -86,13 +87,28 @@ class PodImageView(APIView):
 class ContactView(APIView):
     
     def post(self, request):
+        print("Request data:", request.data)
+        
         serializer = ContactSerializer(data=request.data)
         
         if serializer.is_valid():
+            
+            print("Validated data:", serializer.validated_data)
+            
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
+        print("Serializer errors:", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def get(self, request, *args, **kwargs):
+        permission_classes = IsAuthenticated
+        
+        if not request.user.is_authenticated:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        
+        contact = ContactSerializer()
+        return Response(contact.data, status=status.HTTP_200_OK)
     
     
         

@@ -16,8 +16,11 @@ class AddPodSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
         
-class ContactSerializer(serializers.Serializer):
+class ContactSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Contact
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'email', 'phone', 'message'] 
+        
+    def create(self, validated_data):
+        return Contact.objects.create(**validated_data)
