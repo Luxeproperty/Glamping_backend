@@ -26,7 +26,8 @@ SECRET_KEY = "django-insecure-4gwjc_0*af0s_r1-6^glauo4-9%r#0+_mtqcf4k(pz&qbh9@(q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_countries",
     "phonenumber_field",
+    "corsheaders",
     
     "home",
     # "booking",
@@ -51,11 +53,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    
 ]
 
 ROOT_URLCONF = "glamping_app.urls"

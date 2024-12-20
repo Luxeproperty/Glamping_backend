@@ -2,7 +2,7 @@ from rest_framework import status
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from home.api.serealizers import AddPodSerializer, AddPodImageSerializer, ContactSerializer
 from home.models import Pods, PodImages
@@ -84,7 +84,7 @@ class PodImageView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
         
-class ContactView(APIView):
+class CreateContactView(APIView):
     
     def post(self, request):
         print("Request data:", request.data)
@@ -101,8 +101,10 @@ class ContactView(APIView):
         print("Serializer errors:", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    
+class GetContactView(APIView):
     def get(self, request, *args, **kwargs):
-        permission_classes = IsAuthenticated
+        permission_classes = IsAdminUser
         
         if not request.user.is_authenticated:
             return Response(status=status.HTTP_403_FORBIDDEN)
