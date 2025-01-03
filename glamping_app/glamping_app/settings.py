@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-4gwjc_0*af0s_r1-6^glauo4-9%r#0+_mtqcf4k(pz&qbh9@(q"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True
@@ -39,12 +39,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
+
     "rest_framework",
     "django_countries",
     "phonenumber_field",
     "corsheaders",
-    
+
     "home",
     # "booking",
     # "payment",
@@ -59,7 +59,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    
 ]
 
 ROOT_URLCONF = "glamping_app.urls"
@@ -113,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    
+
 }
 
 
@@ -140,6 +139,18 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# For email purposes
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = "smtp.office365.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = "website@countryglampinguk.com"  # Replace with your actual Gmail address
+EMAIL_HOST_PASSWORD = "CountryGlamping2025"  # Use an App Password if 2FA is enabled
+DEFAULT_FROM_EMAIL = "website@countryglampinguk.com"
+NOTIFY_EMAIL = "eldridgeriberio@gmail.com"
 
 STRIPE_PUBLIC_KEY = 'your-stripe-public-key'
 STRIPE_SECRET_KEY = 'your-stripe-secret-key'

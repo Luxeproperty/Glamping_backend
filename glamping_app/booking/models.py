@@ -15,6 +15,7 @@ class GuestDetails(models.Model):
     email = models.EmailField(unique=True)
     post_code = models.CharField(max_length=10)
     country = CountryField(blank='(Select country)')
+    message = models.TextField(blank=True) #added for email/ may need to remove later
   
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
