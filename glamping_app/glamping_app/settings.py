@@ -16,6 +16,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -66,7 +67,7 @@ ROOT_URLCONF = "glamping_app.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["TEMPLATE_DIR", "STATIC_ROOT"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -132,6 +133,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
 
@@ -143,13 +147,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # For email purposes
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_HOST = "smtp.office365.com"
+EMAIL_HOST = "smtp.titan.email"
+# EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = "website@countryglampinguk.com"  # Replace with your actual Gmail address
-EMAIL_HOST_PASSWORD = "CountryGlamping2025"  # Use an App Password if 2FA is enabled
+EMAIL_HOST_USER = "website@countryglampinguk.com"
+EMAIL_HOST_PASSWORD = "CountryGlamping2025"
+# EMAIL_HOST_USER = "eldridgeriberio@gmail.com"
+# EMAIL_HOST_PASSWORD = "adlt udlq kned jyol"
 DEFAULT_FROM_EMAIL = "website@countryglampinguk.com"
+# DEFAULT_FROM_EMAIL = "eldridgeriberio@gmail.com"
 NOTIFY_EMAIL = "eldridgeriberio@gmail.com"
 
 STRIPE_PUBLIC_KEY = 'your-stripe-public-key'

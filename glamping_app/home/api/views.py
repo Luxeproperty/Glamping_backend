@@ -10,6 +10,9 @@ from home.api.permissions import IsAdminOrReadOnly
 
 from django.core.mail import EmailMessage
 
+# from django.views.decorators.csrf import csrf_protect
+# from django.utils.decorators import method_decorator
+
 from django.conf import settings
 
 # Create your views here.
@@ -89,9 +92,12 @@ class PodImageView(APIView):
 
 
 class CreateContactView(APIView):
-
+    
+    # @method_decorator(csrf_protect)
     def post(self, request):
+        
         print("Request data:", request.data)
+        print("Request method:", request.method)
 
         serializer = ContactSerializer(data=request.data)
 
@@ -110,11 +116,14 @@ class CreateContactView(APIView):
                 body= full_message,
                 from_email= settings.DEFAULT_FROM_EMAIL,
                 to = [settings.NOTIFY_EMAIL],
-                # fail_silently=False,
+                # fail_silently=False,  
             )
 
             email.content_subtype = 'html'
-            email.send()
+            try:
+                email.send()
+            except Exception as e:
+                return Response({'error': 'Email sending failed', 'details': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
             serializer.save()

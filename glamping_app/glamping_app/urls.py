@@ -24,4 +24,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('home.api.urls')),
     # path('booking/', include('booking.api.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
