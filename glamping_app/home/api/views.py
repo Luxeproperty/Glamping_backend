@@ -102,6 +102,7 @@ class CreateContactView(APIView):
         serializer = ContactSerializer(data=request.data)
 
         if serializer.is_valid():
+            serializer.save()
 
             print("Validated data:", serializer.validated_data)
 
@@ -112,7 +113,7 @@ class CreateContactView(APIView):
             )
 
             email = EmailMessage(
-                subject= "From Glamping app",
+                subject= "Glamping Website Enquiry",
                 body= full_message,
                 from_email= settings.DEFAULT_FROM_EMAIL,
                 to = [settings.NOTIFY_EMAIL],
@@ -125,8 +126,6 @@ class CreateContactView(APIView):
             except Exception as e:
                 return Response({'error': 'Email sending failed', 'details': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
-            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         print("Serializer errors:", serializer.errors)

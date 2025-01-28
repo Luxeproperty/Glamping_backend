@@ -29,7 +29,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [".onrender.com"]
+# ALLOWED_HOSTS = [".onrender.com"]
+ALLOWED_HOSTS = ["*"]
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 
@@ -159,6 +161,7 @@ EMAIL_HOST_USER = "website@countryglampinguk.com"
 EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
 DEFAULT_FROM_EMAIL = "website@countryglampinguk.com"
 NOTIFY_EMAIL = "enquiries@countryglampinguk.com"
+# NOTIFY_EMAIL = "eldridgeriberio@gmail.com"
 
 STRIPE_PUBLIC_KEY = 'your-stripe-public-key'
 STRIPE_SECRET_KEY = 'your-stripe-secret-key'
